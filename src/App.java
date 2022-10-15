@@ -13,12 +13,10 @@ import javafx.stage.Stage;
  
 public class App extends Application {
     public static void main(String[] args) throws IOException {
-        // launch(args);
-        // System.out.println("fffffffffffff");
+
     Excel excel=new Excel("Projects.xls","","");
-    ArrayList myyData=excel.ReadFile("src/Projects.xls");
-    // excel.mergeStages();
-    // excel.ReadFile("src/mergeStages.xls");
+    ArrayList myData=excel.ReadFile("src/Projects.xls");
+
     }
     
     @Override

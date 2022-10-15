@@ -37,10 +37,7 @@ class Excel{
     String pFile;
     String sFile;
     String sdFile;
-    DateFormat df1= new SimpleDateFormat("MM/dd/yyyy");
-    DateFormat df2= new SimpleDateFormat("dd.MM.YYYY HH:mm:ss");
-    
-
+    String msFile="src/mergeStages.xls";
 
     Excel(String projectsFile, String stagesFile, String stagesDetaildFile){
         pFile = projectsFile;
@@ -48,7 +45,6 @@ class Excel{
         sdFile = stagesDetaildFile;
     }
 
-    // ArrayList<ArrayList<String>>
     ArrayList ReadFile(String filename) throws IOException{
 
     try
@@ -146,13 +142,13 @@ Date CreateDate(String date) throws Exception{
  * 
  */
 void mergeStages(){
-    if (!new File("src/mergeStages.xls").isFile()){
+    if (!new File(msFile).isFile()){
 
     try{
-Workbook SourceBook1 = new Workbook("src/Stages.xls");
+Workbook SourceBook1 = new Workbook(sFile);
 
     // Open the second excel file.
-Workbook SourceBook2 = new Workbook("src/Stages_Detailed.xls");
+Workbook SourceBook2 = new Workbook(sdFile);
 
 
 // Copy worksheets of second Excel file to the first workbook.
@@ -160,10 +156,10 @@ SourceBook1.combine(SourceBook2);
 
 
 // Save the updated first excel file as a new file.
-SourceBook1.save("src/mergeStages.xls");
+SourceBook1.save(sdFile);
 
 // Open a Workbook.
-Workbook workbook = new Workbook("src/mergeStages.xls");
+Workbook workbook = new Workbook(sdFile);
 
 
 // Add a worksheet named Summary_sheet
@@ -196,14 +192,14 @@ for (String sheetName : nameOfSourceWorksheets) {
 
 // Save the excel file.
 
-    workbook.save("src/mergeStages.xls");
+    workbook.save(sdFile);
 
-    Workbook wrDelete = new Workbook("src/mergeStages.xls");
+    Workbook wrDelete = new Workbook(sdFile);
     wrDelete.getWorksheets().removeAt(0);
     wrDelete.getWorksheets().removeAt(0);
     wrDelete.getWorksheets().removeAt(0);
     wrDelete.getWorksheets().removeAt(1);
-    wrDelete.save("src/mergeStages.xls");
+    wrDelete.save(sdFile);
 
 
    
@@ -215,8 +211,6 @@ for (String sheetName : nameOfSourceWorksheets) {
 } 
 else
     System.out.println("file exist");
-
-
 }
 
 }
