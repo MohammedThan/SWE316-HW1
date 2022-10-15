@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     public static void main(String[] args) throws IOException {
 
-    Excel excel=new Excel("Projects.xls","","");
+    Excel excel=new Excel("src/Projects.xls","src/Stages.xls","src/Stages_Detailed.xls");
     ArrayList myData=excel.ReadFile("src/Projects.xls");
 
     }
