@@ -13,32 +13,30 @@ import javafx.stage.Stage;
  
 public class App extends Application {
     public static void main(String[] args) throws IOException {
-
+    launch();
     Excel excel=new Excel("src/Projects.xls","src/Stages.xls","src/Stages_Detailed.xls");
-    ArrayList myData=excel.ReadFile("src/Projects.xls");
-
+    ArrayList myData=excel.getProjects();
+    ArrayList myData2=excel.getStagesMerged();
+    System.out.println(myData.get(1));
+    System.out.println(myData2.get(1));
     }
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        // primaryStage.setTitle("Hello World!");
-        // Button btn = new  Button();
-        // btn.setText("Say 'Hello World'");
-        // btn.setOnAction(new EventHandler<ActionEvent>() {
+         primaryStage.setTitle("Hello World!");
+         Button btn = new  Button();
+         btn.setText("Say 'Hello World'");
+         btn.setOnAction(new EventHandler<ActionEvent>() {
  
-        //     @Override
-        //     public void handle(ActionEvent event) {
-        //         System.out.println("Hello World!");
-        //     }
-        // });
+             @Override
+             public void handle(ActionEvent event) {
+                 System.out.println("Hello World!");
+             }
+         });
         
-        // StackPane root = new StackPane();
-        // root.getChildren().add(btn);
-        // primaryStage.setScene(new Scene(root, 300, 250));
-        // primaryStage.show();
-        // Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        // primaryStage.setTitle("Workbook GUI application");
-        // primaryStage.setScene(new Scene(root, 800, 800));
-        // primaryStage.show();
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+        primaryStage.setScene(new Scene(root, 300, 250));
+        primaryStage.show();
     }
 }
