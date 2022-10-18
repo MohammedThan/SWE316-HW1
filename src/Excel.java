@@ -12,15 +12,15 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 class Excel {
-    String pFile;
-    String sFile;
-    String sdFile;
+    String projectsFile;
+    String stagesFile;
+    String stagesDetailedFile;
 
     Excel(String projectsFile, String stagesFile, String stagesDetaildFile) {
 
-        pFile = projectsFile;
-        sFile = stagesFile;
-        sdFile = stagesDetaildFile;
+        this.projectsFile = projectsFile;
+        this.stagesFile = stagesFile;
+        this.stagesDetailedFile = stagesDetaildFile;
     }
 
     private ArrayList readFile(String filename) throws IOException {
@@ -96,7 +96,7 @@ class Excel {
 
     public ArrayList getProjects() throws IOException {
 
-        ArrayList<ArrayList> array = readFile(pFile);
+        ArrayList<ArrayList> array = readFile(projectsFile);
 
         for (int i = 0; i < array.size(); i++) {
             array.get(i).remove(3); //remove startdate
@@ -108,8 +108,8 @@ class Excel {
     }
 
     public ArrayList getStagesMerged() throws IOException {
-        ArrayList<ArrayList> s = readFile(sFile);
-        ArrayList<ArrayList> sd = readFile(sdFile);
+        ArrayList<ArrayList> s = readFile(stagesFile);
+        ArrayList<ArrayList> sd = readFile(stagesDetailedFile);
 
         for (int i = 0; i < s.size(); i++) {
             sd.get(i).remove(3); //remove time col
