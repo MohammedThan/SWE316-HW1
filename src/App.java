@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     public static void main(String[] args) throws IOException {
     launch();
-    
+
     
     }
     
@@ -26,7 +26,7 @@ public class App extends Application {
         Excel excel=new Excel("src/Projects.xls","src/Stages.xls","src/Stages_Detailed.xls");
 
     // Getting the data from the excel files and storing it in an array list.
-    //
+    
     ArrayList projectsArray = excel.getProjects();
     ArrayList StagesArray = excel.getStagesMerged();
 

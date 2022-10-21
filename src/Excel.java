@@ -12,9 +12,9 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 class Excel {
-    String projectsFile;
-    String stagesFile;
-    String stagesDetailedFile;
+      String projectsFile;
+      String stagesFile;
+      String stagesDetailedFile;
 
     Excel(String projectsFile, String stagesFile, String stagesDetaildFile) {
 
@@ -23,7 +23,7 @@ class Excel {
         this.stagesDetailedFile = stagesDetaildFile;
     }
 
-    private ArrayList readFile(String filename) throws IOException {
+    private   ArrayList readFile(String filename) throws IOException {
 
         try {
             FileInputStream fis = new FileInputStream(new File(filename));
@@ -76,14 +76,14 @@ class Excel {
         return null;
     }
 
-    private Boolean IsDate(String date) {
+    private   Boolean IsDate(String date) {
 
         if (date.contains(":"))
             return true;
         return false;
     }
 
-    private Date CreateDate(String date) throws Exception {
+    private   Date CreateDate(String date) throws Exception {
 
         if (date.contains(":")) {
             return new Date(Integer.parseInt(date.substring(6, 10)) - 1900,
@@ -94,7 +94,7 @@ class Excel {
         }
     }
 
-    public ArrayList getProjects() throws IOException {
+    public   ArrayList getProjects() throws IOException {
 
         ArrayList<ArrayList> array = readFile(projectsFile);
 
@@ -107,7 +107,7 @@ class Excel {
         return array;
     }
 
-    public ArrayList getStagesMerged() throws IOException {
+    public   ArrayList getStagesMerged() throws IOException {
         ArrayList<ArrayList> s = readFile(stagesFile);
         ArrayList<ArrayList> sd = readFile(stagesDetailedFile);
 
