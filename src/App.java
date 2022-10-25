@@ -26,29 +26,39 @@ public class App extends Application {
         Excel excel=new Excel("src/Projects.xls","src/Stages.xls","src/Stages_Detailed.xls");
 
     // Getting the data from the excel files and storing it in an array list.
+    CreateProjectObj projectsCreator = new CreateProjectObj(excel);
     
     ArrayList projectsArray = excel.getProjects();
+    ArrayList projectsArrayFromCreator = projectsCreator.getAllProjects(excel);
+
     ArrayList StagesArray = excel.getStagesMerged();
 
          primaryStage.setTitle("Hello World!");
          Button btn = new  Button();
 
-         TableView projectsTable = new TableView<Object>();
+         TableView projectsTable = new TableView<Project>();
 
-         TableColumn projectIdColumn = new TableColumn<Object,String>("Project ID");
-         projectIdColumn.setCellValueFactory(new PropertyValueFactory<Object, String>("ProjectID"));
+         TableColumn projectIdColumn = new TableColumn<Project,String>("costumerProjectID");
+         projectIdColumn.setCellValueFactory(new PropertyValueFactory<Project, String>("costumerProjectID"));
 
          projectsTable.getColumns().add(projectIdColumn);
 
          projectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-         projectsTable.getItems().add(projectsArray.get(0));
+         projectsTable.getItems().add(projectsArrayFromCreator.get(0));
 
          btn.setText("Say 'Hello World'");
+
          btn.setOnAction(new EventHandler<ActionEvent>() {
              @Override
              public void handle(ActionEvent event) {
-                 System.out.println(projectsArray.get(0));
-                 System.out.println(StagesArray.get(0));
+                 Project f = ((Project)projectsArrayFromCreator.get(0));
+                 ArrayList<ProjectStage> ff = f.getProjectStages();
+
+                for(ProjectStage s : ff){
+                    System.out.print(f.getNodeID());
+                    System.out.println("   "+s.objectValue+"\n");
+                }
+                
              }
          });
         

@@ -5,22 +5,24 @@ import java.util.Date;
 public class CreateStagesObj {
 
     ArrayList<ArrayList> excelStg;
-    ArrayList<Stage> stages=new  ArrayList<Stage>();
+    ArrayList<ProjectStage> stages=new  ArrayList<ProjectStage>();
 
     public CreateStagesObj( Excel excel) throws IOException{
         excelStg=excel.getStagesMerged();
     }
 
-    public ArrayList<Stage> getAllStages(String objValue){
+    public ArrayList<ProjectStage> getAllStages(String objValue){
         for(int i=0; i<excelStg.size(); i++){
-
-            if( excelStg.get(i).get(0).equals(objValue)){
-                stages.add(new Stage(
-                    (String)excelStg.get(i).get(0),
-                    (double)excelStg.get(i).get(1),
-                    (Date) excelStg.get(i).get(2),
-                    (double) excelStg.get(i).get(3),
-                    (boolean) excelStg.get(i).get(4)));
+            String currentStageObjectValue = (String)excelStg.get(i).get(0);
+            if( currentStageObjectValue.equals(objValue)){
+                stages.add(
+                    new ProjectStage(
+                        (String)excelStg.get(i).get(0),
+                        (double)excelStg.get(i).get(1),
+                        (Date) excelStg.get(i).get(2),
+                        (double) excelStg.get(i).get(3),
+                        (boolean) excelStg.get(i).get(4))
+                    );
             }
     }
     return stages;

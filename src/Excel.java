@@ -99,10 +99,10 @@ class Excel {
         ArrayList<ArrayList> array = readFile(projectsFile);
 
         for (int i = 0; i < array.size(); i++) {
-            array.get(i).remove(3); //remove startdate
-            array.get(i).remove(3); //remove enddate
-            array.get(i).remove(3); //remove Customer
-            array.get(i).remove(3); //remove Currency
+            // // array.get(i).remove(3); //remove startdate
+            // // array.get(i).remove(3); //remove enddate
+            array.get(i).remove(5); //remove Customer
+            array.get(i).remove(5); //remove Currency
         }
         return array;
     }

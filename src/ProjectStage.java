@@ -1,13 +1,50 @@
+import java.util.Date;
 
-public class ProjectStage {
-    private String nodeID;
-    private int currentStage;
-    private int previousStage;
-    private boolean isOnRework = currentStage>=previousStage ? false : true;
 
-    public ProjectStage(String objectValue, int newValue, int oldValue){
-        this.nodeID = objectValue;
-        this.currentStage = newValue;
-        this.previousStage = oldValue;
+public class ProjectStage{
+    String objectValue;
+    double docNum;
+    Date date;
+    double newValue;
+    boolean isNormal;
+    // private boolean isOnRework = currentStage>=previousStage ? false : true;
+
+
+
+    public ProjectStage(    String objectValue, double docNum,Date date,double newValue,boolean isNormal){
+        this.objectValue=objectValue;
+        this.docNum= docNum;
+        this.date=date;
+        this.newValue= newValue;
+        this.isNormal= isNormal;
     }
+
+  public String getObjectValue(){
+    return objectValue;
+  }
+
+  public double getDocNum(){
+    return docNum;
+  }
+
+  public Date getDate(){
+    return date;
+  }
+
+  public double GetNewValue(){
+    return newValue;
+  }
+
+  public boolean getIsNormal(){
+    return isNormal;
+  }
+
+  @Override
+  public String toString(){
+    return "nodeID: "+this.objectValue;
+  }
+
+
+
+
 }
