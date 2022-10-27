@@ -86,8 +86,8 @@ class Excel {
     private   Date CreateDate(String date) throws Exception {
 
         if (date.contains(":")) {
-            return new Date(Integer.parseInt(date.substring(6, 10)) - 1900,
-                    Integer.parseInt(date.substring(3, 5)),
+            return new Date(Integer.parseInt(date.substring(6, 10))-1900,
+                    Integer.parseInt(date.substring(3, 5))-1,
                     Integer.parseInt(date.substring(0, 2)));
         } else {
             throw new Exception("invalid date format" + date);

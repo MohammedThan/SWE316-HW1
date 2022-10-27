@@ -23,7 +23,7 @@ public class CreateProjectObj {
             Date startDate = (Date) excelPro.get(i).get(3);  //Start Date. example: Fri May 28 00:00:00 AST 2021            
             Date endDate = (Date) excelPro.get(i).get(4);  //End Date. example: Thu Jun 02 00:00:00 AST 2022            
             Date createdOn = (Date) excelPro.get(i).get(5); //Created On Date. example: Wed Sep 15 00:00:00 AST 2021
-            Date changedOn = (Date) excelPro.get(i).get(5);  //Thu Mar 17 00:00:00 AST 2022
+            Date changedOn = (Date) excelPro.get(i).get(6);  //Thu Mar 17 00:00:00 AST 2022
                         
                 Project newProject = new Project(
                     nodeID, 

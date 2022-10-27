@@ -11,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
 public class App extends Application {
@@ -29,7 +31,7 @@ public class App extends Application {
     // Getting the data from the excel files and storing it in an array list.
     CreateProjectObj projectsCreator = new CreateProjectObj(excel);
     
-    ArrayList projectsArrayFromCreator = projectsCreator.getAllProjects(excel);
+    ArrayList<Project> projectsArrayFromCreator = projectsCreator.getAllProjects(excel);
 
     ArrayList StagesArray = excel.getStagesMerged();
 
@@ -70,7 +72,12 @@ public class App extends Application {
          });
         
         HBox root = new HBox();
-        root.getChildren().addAll(projectsTable, btn);
+        System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
+        System.out.println(projectsArrayFromCreator.get(67).getCreatedOn());
+        System.out.println(projectsArrayFromCreator.get(67).getChangedOn());
+
+        BorderPane borderPane = new Draw(projectsArrayFromCreator.get(67)).getTemplet();
+        root.getChildren().addAll(projectsTable, btn,borderPane);
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
     }
