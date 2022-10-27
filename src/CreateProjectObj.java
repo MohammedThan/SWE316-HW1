@@ -32,11 +32,12 @@ public class CreateProjectObj {
                     startDate,
                     endDate,
                     createdOn,  
-                    changedOn
+                    changedOn,
+                    stagesObjectsCreator.getAllStages(nodeID)
             );
 
-            ArrayList stagesArrayFromCreator = stagesObjectsCreator.getAllStages(nodeID);
-            newProject.setProjectStages(stagesArrayFromCreator);
+            // ArrayList<ProjectStage> stagesArrayFromCreator = stagesObjectsCreator.getAllStages(nodeID);
+            // newProject.setProjectStages(stagesArrayFromCreator);
             
             projects.add(newProject);
         }

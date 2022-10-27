@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
  
@@ -28,7 +29,6 @@ public class App extends Application {
     // Getting the data from the excel files and storing it in an array list.
     CreateProjectObj projectsCreator = new CreateProjectObj(excel);
     
-    ArrayList projectsArray = excel.getProjects();
     ArrayList projectsArrayFromCreator = projectsCreator.getAllProjects(excel);
 
     ArrayList StagesArray = excel.getStagesMerged();
@@ -39,19 +39,26 @@ public class App extends Application {
          TableView projectsTable = new TableView<Project>();
 
          TableColumn projectIdColumn = new TableColumn<Project,String>("costumerProjectID");
+         TableColumn projectStageColumn = new TableColumn<Project,String>("currentStage");
+
          projectIdColumn.setCellValueFactory(new PropertyValueFactory<Project, String>("costumerProjectID"));
+         projectStageColumn.setCellValueFactory(new PropertyValueFactory<Project, String>("currentStage"));
 
          projectsTable.getColumns().add(projectIdColumn);
+         projectsTable.getColumns().add(projectStageColumn);
 
          projectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-         projectsTable.getItems().add(projectsArrayFromCreator.get(0));
 
-         btn.setText("Say 'Hello World'");
+         for(int i=0; i<projectsArrayFromCreator.size(); i++){
+            projectsTable.getItems().add(projectsArrayFromCreator.get(i));
+         }
+
+         btn.setText("Test Button");
 
          btn.setOnAction(new EventHandler<ActionEvent>() {
              @Override
              public void handle(ActionEvent event) {
-                 Project f = ((Project)projectsArrayFromCreator.get(0));
+                 Project f = ((Project)projectsArrayFromCreator.get(5));
                  ArrayList<ProjectStage> ff = f.getProjectStages();
 
                 for(ProjectStage s : ff){
@@ -62,7 +69,7 @@ public class App extends Application {
              }
          });
         
-        StackPane root = new StackPane();
+        HBox root = new HBox();
         root.getChildren().addAll(projectsTable, btn);
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();

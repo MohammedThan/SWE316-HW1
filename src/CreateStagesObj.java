@@ -5,13 +5,13 @@ import java.util.Date;
 public class CreateStagesObj {
 
     ArrayList<ArrayList> excelStg;
-    ArrayList<ProjectStage> stages=new  ArrayList<ProjectStage>();
 
     public CreateStagesObj( Excel excel) throws IOException{
         excelStg=excel.getStagesMerged();
     }
 
     public ArrayList<ProjectStage> getAllStages(String objValue){
+        ArrayList<ProjectStage> stages=new  ArrayList<ProjectStage>();
         for(int i=0; i<excelStg.size(); i++){
             String currentStageObjectValue = (String)excelStg.get(i).get(0);
             if( currentStageObjectValue.equals(objValue)){

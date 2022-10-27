@@ -14,7 +14,7 @@ public class Project {
    
 
     public ArrayList<ProjectStage> getProjectStages() {
-        return projectStages;
+        return this.projectStages;
     }
 
     public void addToProjectStages(ProjectStage stageObject){
@@ -81,7 +81,7 @@ public class Project {
         this.changedOn = changedOn;
     }
 
-    public Project(String nodeID, String costumerProjectID, int currentStage, Date startDate, Date endDate, Date createdOn, Date changedOn){
+    public Project(String nodeID, String costumerProjectID, int currentStage, Date startDate, Date endDate, Date createdOn, Date changedOn, ArrayList<ProjectStage> projectStages){
         this.nodeID = nodeID;
         this.costumerProjectID = costumerProjectID;
         this.currentStage = currentStage;
@@ -89,6 +89,7 @@ public class Project {
         this.endDate = endDate;
         this.createdOn = createdOn;
         this.changedOn = changedOn;
+        this.projectStages = projectStages;
     }
 
     
