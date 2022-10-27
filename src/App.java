@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -72,11 +73,11 @@ public class App extends Application {
          });
         
         HBox root = new HBox();
-        System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
-        System.out.println(projectsArrayFromCreator.get(67).getCreatedOn());
-        System.out.println(projectsArrayFromCreator.get(67).getChangedOn());
+        // System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
+        // System.out.println(projectsArrayFromCreator.get(67).getCreatedOn());
+        // System.out.println(projectsArrayFromCreator.get(67).getChangedOn());
 
-        BorderPane borderPane = new Draw(projectsArrayFromCreator.get(67)).getTemplet();
+        Pane borderPane = new Draw(projectsArrayFromCreator.get(67)).getTemplet();
         root.getChildren().addAll(projectsTable, btn,borderPane);
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
