@@ -113,7 +113,7 @@ public class MyDate {
      public ArrayList<Double> allStagePoint(){
         ArrayList<Double> list=new ArrayList<Double>();
         for(int i=0;i<project.getProjectStages().size();i++){
-            list.add((double) (1200/findAllDaysDruration()*durationToAdate(project.getProjectStages().get(i).getDate())));
+            list.add((double) (1200*durationToAdate(project.getProjectStages().get(i).getDate())/findAllDaysDruration()));
         }
         return  list;
      }

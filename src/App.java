@@ -73,7 +73,7 @@ public class App extends Application {
          });
         
         HBox root = new HBox();
-        // System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
+        System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
         // System.out.println(projectsArrayFromCreator.get(67).getCreatedOn());
         // System.out.println(projectsArrayFromCreator.get(67).getChangedOn());
 
