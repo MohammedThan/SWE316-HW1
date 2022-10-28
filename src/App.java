@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -37,8 +40,7 @@ public class App extends Application {
     ArrayList StagesArray = excel.getStagesMerged();
 
          primaryStage.setTitle("Hello World!");
-         Button btn = new  Button();
-
+         
          TableView projectsTable = new TableView<Project>();
 
          TableColumn projectIdColumn = new TableColumn<Project,String>("costumerProjectID");
@@ -56,30 +58,39 @@ public class App extends Application {
             projectsTable.getItems().add(projectsArrayFromCreator.get(i));
          }
 
-         btn.setText("Test Button");
+         
 
-         btn.setOnAction(new EventHandler<ActionEvent>() {
-             @Override
-             public void handle(ActionEvent event) {
-                 Project f = ((Project)projectsArrayFromCreator.get(5));
-                 ArrayList<ProjectStage> ff = f.getProjectStages();
+         TableViewSelectionModel selectionModel = projectsTable.getSelectionModel();
+         ObservableList<Integer> selectedIndecies = selectionModel.getSelectedIndices();
+         int selectedIndex = selectedIndecies.isEmpty() ? 0 : selectedIndecies.get(0);
+         Pane borderPane = new Draw(projectsArrayFromCreator.get(0)).getTemplet();
+         HBox root = new HBox();
+         Scene scene = new Scene(root, 800, 500);
 
-                for(ProjectStage s : ff){
-                    System.out.print(f.getNodeID());
-                    System.out.println("   "+s.objectValue+"\n");
+         ArrayList borderPanesList = new ArrayList<>();
+         borderPanesList.add(borderPane);
+
+         selectedIndecies.addListener(
+            new ListChangeListener<Integer>() {
+                @Override
+                public void onChanged(
+                    Change<? extends Integer> change) {
+                    int selectedIndex = selectedIndecies.get(0);
+                    borderPanesList.set(0, new Draw(projectsArrayFromCreator.get(selectedIndex)).getTemplet());
+
+                    //rerender
+                    HBox root = new HBox();
+                    Scene scene = new Scene(root, 800, 500);
+                    root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
+                    // root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
+                    primaryStage.setScene(scene);
                 }
-                
-             }
-         });
+            });
         
-        HBox root = new HBox();
-        System.out.println(projectsArrayFromCreator.get(67).getCostumerProjectID());
-        // System.out.println(projectsArrayFromCreator.get(67).getCreatedOn());
-        // System.out.println(projectsArrayFromCreator.get(67).getChangedOn());
 
-        Pane borderPane = new Draw(projectsArrayFromCreator.get(67)).getTemplet();
-        root.getChildren().addAll(projectsTable, btn,borderPane);
-        primaryStage.setScene(new Scene(root, 800, 500));
+        root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
+        
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
