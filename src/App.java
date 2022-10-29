@@ -30,7 +30,7 @@ public class App extends Application {
 
     ArrayList StagesArray = excel.getStagesMerged();
 
-         primaryStage.setTitle("Hello World!");
+         primaryStage.setTitle("XYZsoft");
          
          TableView projectsTable = new TableView<Project>();
 
