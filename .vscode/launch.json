@@ -6,10 +6,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "SWE316-HW1 - Copy (2)_377a3030",
+            "vmArgs": "--module-path \"C:/Users/ByRvN/VSCode Projects/SWE316/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+
+            
+        },
+        {
+            "type": "java",
             "name": "Launch test",
             "request": "launch",
             "mainClass": "test",
-            "projectName": "SWE316-HW1_62346377"
+            "projectName": "SWE316-HW1_62346377",
+            "vmArgs": "--module-path \"C:/Users/ByRvN/VSCode Projects/SWE316/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+
         },
         {
             "type": "java",
@@ -17,7 +29,7 @@
             "request": "launch",
             "mainClass": "App",
             "projectName": "SWE316-HW1_34ca0f04",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/ByRvN/VSCode Projects/SWE316/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -25,7 +37,7 @@
             "request": "launch",
             "mainClass": "App",
             "projectName": "SWE316-HW1_62346377",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+            "vmArgs": "--module-path \"C:/Users/ByRvN/VSCode Projects/SWE316/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
@@ -39,7 +51,7 @@
             "request": "launch",
             "mainClass": "App",
             "projectName": "xyzSoft_69e27f98",
-            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
-         }
+            "vmArgs": "--module-path \"C:/Users/ByRvN/VSCode Projects/SWE316/openjfx-19_windows-x64_bin-sdk/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
+        }
     ]
 }

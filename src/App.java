@@ -1,24 +1,15 @@
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
 public class App extends Application {
@@ -58,8 +49,6 @@ public class App extends Application {
             projectsTable.getItems().add(projectsArrayFromCreator.get(i));
          }
 
-         
-
          TableViewSelectionModel selectionModel = projectsTable.getSelectionModel();
          ObservableList<Integer> selectedIndecies = selectionModel.getSelectedIndices();
          int selectedIndex = selectedIndecies.isEmpty() ? 0 : selectedIndecies.get(0);
@@ -81,14 +70,13 @@ public class App extends Application {
                     //rerender
                     HBox root = new HBox();
                     Scene scene = new Scene(root, 800, 500);
-                    root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
-                    // root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
+                    root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
                     primaryStage.setScene(scene);
                 }
             });
         
 
-        root.getChildren().addAll(projectsTable, btn, ((Pane)borderPanesList.get(0)));
+        root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
         
         primaryStage.setScene(scene);
         primaryStage.show();

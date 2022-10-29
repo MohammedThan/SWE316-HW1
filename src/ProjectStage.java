@@ -7,7 +7,6 @@ public class ProjectStage{
     Date date;
     double newValue;
     boolean isNormal;
-    // private boolean isOnRework = currentStage>=previousStage ? false : true;
 
 
 

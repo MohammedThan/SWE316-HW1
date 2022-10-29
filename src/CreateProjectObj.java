@@ -35,9 +35,6 @@ public class CreateProjectObj {
                     changedOn,
                     stagesObjectsCreator.getAllStages(nodeID)
             );
-
-            // ArrayList<ProjectStage> stagesArrayFromCreator = stagesObjectsCreator.getAllStages(nodeID);
-            // newProject.setProjectStages(stagesArrayFromCreator);
             
             projects.add(newProject);
         }
