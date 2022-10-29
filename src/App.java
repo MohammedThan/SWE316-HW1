@@ -54,7 +54,7 @@ public class App extends Application {
          int selectedIndex = selectedIndecies.isEmpty() ? 0 : selectedIndecies.get(0);
          Pane borderPane = new Draw(projectsArrayFromCreator.get(0)).getTemplet();
          HBox root = new HBox();
-         Scene scene = new Scene(root, 800, 500);
+         Scene scene = new Scene(root);
 
          ArrayList borderPanesList = new ArrayList<>();
          borderPanesList.add(borderPane);
@@ -69,13 +69,14 @@ public class App extends Application {
 
                     //rerender
                     HBox root = new HBox();
-                    Scene scene = new Scene(root, 800, 500);
+                    Scene scene = new Scene(root);
+                    root.setSpacing(50);
                     root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
                     primaryStage.setScene(scene);
                 }
             });
         
-
+        root.setSpacing(50);
         root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
         
         primaryStage.setScene(scene);

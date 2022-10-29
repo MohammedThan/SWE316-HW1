@@ -97,8 +97,6 @@ public class MyDate {
     }
 
     public long durationToMinDate(){
-        System.out.println(convertToLocalDateViaMilisecond(minDate(project.getProjectStages())));
-        System.out.println(ChronoUnit.DAYS.between(getCreatedOn(), convertToLocalDateViaMilisecond(minDate(project.getProjectStages()))));
        return ChronoUnit.DAYS.between(getFakeCreatedOn(), convertToLocalDateViaMilisecond(minDate(project.getProjectStages())));
     }
 

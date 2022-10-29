@@ -91,7 +91,6 @@ public class Draw {
 
     }
 
-    System.out.println(mydate.allStagePoint());
   
  }
 
