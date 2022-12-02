@@ -8,12 +8,15 @@ public class CreateProjectObj {
     
     CreateProjectObj(Excel excel) throws IOException{
         excelPro=excel.getProjects();
+
+
     }
 
 
     public ArrayList<Project>   getAllProjects(Excel excel) throws IOException{
 
         CreateStagesObj stagesObjectsCreator = new CreateStagesObj(excel);
+
 
         for(int i=0;i< excelPro.size();i++){
             
@@ -24,6 +27,9 @@ public class CreateProjectObj {
             Date endDate = (Date) excelPro.get(i).get(4);  //End Date. example: Thu Jun 02 00:00:00 AST 2022            
             Date createdOn = (Date) excelPro.get(i).get(5); //Created On Date. example: Wed Sep 15 00:00:00 AST 2021
             Date changedOn = (Date) excelPro.get(i).get(6);  //Thu Mar 17 00:00:00 AST 2022
+
+            ArrayList<ProjectStage> AllStages=stagesObjectsCreator.getAllStages(nodeID);
+
                         
                 Project newProject = new Project(
                     nodeID, 
@@ -33,7 +39,9 @@ public class CreateProjectObj {
                     endDate,
                     createdOn,  
                     changedOn,
-                    stagesObjectsCreator.getAllStages(nodeID)
+                    ReWork.getBARework(AllStages),
+                    ReWork.getAARework(AllStages),
+                    AllStages
             );
             
             projects.add(newProject);
@@ -41,5 +49,6 @@ public class CreateProjectObj {
 
         return projects;
     }
+
     
 }

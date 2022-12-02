@@ -9,6 +9,8 @@ public class Project {
     private Date endDate;
     private Date createdOn;
     private Date changedOn;
+    private int bAReWork;
+    private int aAReWork;
     private ArrayList<ProjectStage> projectStages;
 
    
@@ -81,7 +83,22 @@ public class Project {
         this.changedOn = changedOn;
     }
 
-    public Project(String nodeID, String costumerProjectID, int currentStage, Date startDate, Date endDate, Date createdOn, Date changedOn, ArrayList<ProjectStage> projectStages){
+    public int getAARework(){
+        return aAReWork;
+    }
+
+    public void setAAReWork(int aAReWork){
+        this.aAReWork= aAReWork;
+    }
+
+    public int getBARework(){
+        return bAReWork;
+    }
+    public void setBAReWork(int bAReWork){
+        this.bAReWork= bAReWork;
+    }
+
+    public Project(String nodeID, String costumerProjectID, int currentStage, Date startDate, Date endDate, Date createdOn, Date changedOn,int bAReWork,int aAReWork, ArrayList<ProjectStage> projectStages){
         this.nodeID = nodeID;
         this.costumerProjectID = costumerProjectID;
         this.currentStage = currentStage;
@@ -89,6 +106,8 @@ public class Project {
         this.endDate = endDate;
         this.createdOn = createdOn;
         this.changedOn = changedOn;
+        this.bAReWork=bAReWork;
+        this.aAReWork=aAReWork;
         this.projectStages = projectStages;
     }
 

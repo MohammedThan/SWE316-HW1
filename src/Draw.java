@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color; 
@@ -50,7 +52,7 @@ public class Draw {
  private void addLable(){
     Label label;
     Label duration=new Label("Duration: "+mydate.findStageDaysDifference()+" days");
-    duration.relocate((mydate.durationToMinDate()+mydate.durationToMaxDate())/2*1200/mydate.findAllDaysDruration()-35, 280);
+    duration.relocate((mydate.durationToMinDate()+mydate.durationToMaxDate())/2*1200/mydate.findAllDaysDruration()-35, 180);
     borderPane.getChildren().add(duration);
     for(int i=0;i<=montheNum;i++){
         label=new Label();
@@ -64,11 +66,12 @@ public class Draw {
  }
 
  private void addUpperLine(){
+    int cor=200;
     double startAt=(1200*mydate.durationToMinDate())/mydate.findAllDaysDruration();
     double endAt=1200*mydate.durationToMaxDate()/mydate.findAllDaysDruration();
-    Line line=new Line(startAt,300,endAt,300);
-    Line rline=new Line(startAt,290,startAt,310);
-    Line lline=new Line(endAt,290,endAt,310);
+    Line line=new Line(startAt,cor,endAt,cor);
+    Line rline=new Line(startAt,cor-10,startAt,cor+10);
+    Line lline=new Line(endAt,cor-10,endAt,cor+10);
 
     borderPane.getChildren().addAll(line,rline,lline);
  }
@@ -77,13 +80,13 @@ public class Draw {
 
     for(int i=0;i<mydate.allStagePoint().size();i++){
         if(isDuplicateed(i)){
-            Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),380 );
-            Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), 380, 10,10);
+            Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),updatePoints().get(i) );
+            Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), updatePoints().get(i) , 10,10);
             rectangle.setStroke(color(i)); 
             borderPane.getChildren().addAll(line,rectangle);
         } else{
-            Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),360 );
-            Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), 360, 10,10);
+            Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),updatePoints().get(i)  );
+            Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), updatePoints().get(i) , 10,10);
             rectangle.setStroke(color(i)); 
             borderPane.getChildren().addAll(line,rectangle);
         }
@@ -97,11 +100,53 @@ public class Draw {
  private boolean isDuplicateed(int i){
 
            
-        
-    if(mydate.allStagePoint().lastIndexOf(mydate.allStagePoint().get(i))==i)
+    // mydate.allStagePoint().lastIndexOf(mydate.allStagePoint().get(i))==i // 
+    if(mydate.allStagePoint().subList(0, i).contains(mydate.allStagePoint().get(i)))
         return true;
     return false;
  }
+
+//  private ArrayList<Double> updatePoints(){
+//     ArrayList<Double> allStagePoint=(ArrayList<Double>)mydate.allStagePoint().clone();
+//     ArrayList<Double> hight=new ArrayList<Double>();
+//     for(int i=0;i<allStagePoint.size();i++){
+//         hight.add(360.0);
+//     }
+//     System.out.println(allStagePoint);
+//     System.out.println(hight);
+//     for(int i=0;i<hight.size();i++){
+//         for(int j=0;j<hight.size();j++){
+//             if( allStagePoint.get(i)==allStagePoint.get(j) ){
+//                 System.out.println((j)+" "+(hight.get(j)));
+//                 hight.set(i,hight.get(j)-20);
+//                 System.out.println((j)+" "+(hight.get(j)));
+
+//             }
+            
+//         }
+//     }
+//     System.out.println(hight);
+
+//     return hight;
+//  }
+ private ArrayList<Double> updatePoints(){
+    ArrayList<Double> allStagePoint=(ArrayList<Double>)mydate.allStagePoint().clone();
+    ArrayList<Double> hight=new ArrayList<Double>();
+    for(int i=0;i<allStagePoint.size();i++){
+        hight.add(360.0);
+    }
+
+    for(int i=0;i<hight.size()-1;i++){
+            if( allStagePoint.get(i).equals(allStagePoint.get(i+1)) ){
+                hight.set(i+1,hight.get(i)-20);
+            }
+            
+        
+    }
+
+    return hight;
+ }
+
 
  private Color color(int i){
     if(project.getProjectStages().get(i).getIsNormal()){

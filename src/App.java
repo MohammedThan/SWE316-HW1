@@ -3,19 +3,26 @@ import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
 public class App extends Application {
     public static void main(String[] args) throws IOException {
     launch();
-
+        
     
     }
     
@@ -27,6 +34,7 @@ public class App extends Application {
     CreateProjectObj projectsCreator = new CreateProjectObj(excel);
     
     ArrayList<Project> projectsArrayFromCreator = projectsCreator.getAllProjects(excel);
+
 
     ArrayList StagesArray = excel.getStagesMerged();
 
@@ -43,7 +51,7 @@ public class App extends Application {
          projectsTable.getColumns().add(projectIdColumn);
          projectsTable.getColumns().add(projectStageColumn);
 
-         projectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+         projectsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);         
 
          for(int i=0; i<projectsArrayFromCreator.size(); i++){
             projectsTable.getItems().add(projectsArrayFromCreator.get(i));
@@ -56,6 +64,21 @@ public class App extends Application {
          HBox root = new HBox();
          Scene scene = new Scene(root);
 
+         VBox vbox = new VBox();
+         vbox.setAlignment(Pos.BASELINE_CENTER);
+
+         Button folderbtn = new Button("button");       
+         GridPane rWUI= ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(0).getBARework(), projectsArrayFromCreator.get(0).getBARework());
+
+         vbox.getChildren().addAll( rWUI,borderPane,folderbtn);
+         vbox.setMargin(rWUI, new Insets(10));
+         vbox.setMargin(borderPane, new Insets(10));
+         vbox.setMargin(folderbtn, new Insets(50));
+
+
+
+
+
          ArrayList borderPanesList = new ArrayList<>();
          borderPanesList.add(borderPane);
 
@@ -67,19 +90,38 @@ public class App extends Application {
                     int selectedIndex = selectedIndecies.get(0);
                     borderPanesList.set(0, new Draw(projectsArrayFromCreator.get(selectedIndex)).getTemplet());
 
+
+
                     //rerender
                     HBox root = new HBox();
                     Scene scene = new Scene(root);
                     root.setSpacing(50);
-                    root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
+                    vbox.getChildren().clear();
+                    vbox.getChildren().addAll( ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)));
+                    // root.getChildren().addAll(projectsTable, ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)));
+                    root.getChildren().addAll(projectsTable,vbox);
                     primaryStage.setScene(scene);
+                    primaryStage.setFullScreen(true);
+
                 }
             });
+
+        folderbtn.setOnAction(e ->{
+            try {
+                primaryStage.setScene(new FolderTraverse().getScene());
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            primaryStage.setFullScreen(true);
+             primaryStage.show();        
+            } );
         
         root.setSpacing(50);
-        root.getChildren().addAll(projectsTable, ((Pane)borderPanesList.get(0)));
+        root.getChildren().addAll(projectsTable,vbox);
         
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.setFullScreen(true);
+         primaryStage.show();
     }
 }
