@@ -27,11 +27,12 @@ public class OutputWindow {
         TextArea textArea = new TextArea();
         String output="";
         output=getText(path, output,true,"");
-        System.out.println("output: "+output);
+        // System.out.println("output: "+output);
     
         textArea.setText(output);
         textArea.setEditable(false);
 
+        textArea.setPrefWidth(1000);
 
 
 

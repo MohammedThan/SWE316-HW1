@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
 public class App extends Application {
+
+    Scene scene ;
     public static void main(String[] args) throws IOException {
     launch();
         
@@ -62,12 +64,12 @@ public class App extends Application {
          int selectedIndex = selectedIndecies.isEmpty() ? 0 : selectedIndecies.get(0);
          Pane borderPane = new Draw(projectsArrayFromCreator.get(0)).getTemplet();
          HBox root = new HBox();
-         Scene scene = new Scene(root);
+        scene = new Scene(root);
 
          VBox vbox = new VBox();
          vbox.setAlignment(Pos.BASELINE_CENTER);
 
-         Button folderbtn = new Button("button");       
+         Button folderbtn = new Button("Go to Folder Traverse");       
          GridPane rWUI= ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(0).getBARework(), projectsArrayFromCreator.get(0).getBARework());
 
          vbox.getChildren().addAll( rWUI,borderPane,folderbtn);
@@ -97,7 +99,7 @@ public class App extends Application {
                     Scene scene = new Scene(root);
                     root.setSpacing(50);
                     vbox.getChildren().clear();
-                    vbox.getChildren().addAll( ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)));
+                    vbox.getChildren().addAll( ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)),folderbtn);
                     // root.getChildren().addAll(projectsTable, ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)));
                     root.getChildren().addAll(projectsTable,vbox);
                     primaryStage.setScene(scene);
@@ -108,13 +110,22 @@ public class App extends Application {
 
         folderbtn.setOnAction(e ->{
             try {
-                primaryStage.setScene(new FolderTraverse().getScene());
+                
+             Button exit=new Button("Go back to Timeline");
+
+             exit.setOnAction(e2->{
+                primaryStage.setScene(scene);
+                primaryStage.setFullScreen(true);
+                primaryStage.show();
+             });
+    
+                primaryStage.setScene(new FolderTraverse().getScene(exit));
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             primaryStage.setFullScreen(true);
-             primaryStage.show();        
+            primaryStage.show();        
             } );
         
         root.setSpacing(50);
@@ -122,6 +133,7 @@ public class App extends Application {
         
         primaryStage.setScene(scene);
         primaryStage.setFullScreen(true);
-         primaryStage.show();
+        primaryStage.show();
     }
+
 }

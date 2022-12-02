@@ -3,11 +3,14 @@ import java.io.IOException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MultipleSelectionModel;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -15,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
@@ -128,40 +132,66 @@ public class FolderTraverse {
     String truePath;
     // TreeViewer TVR;
     TreeView TV=new TreeView();
-    OutputWindow outW=new OutputWindow();
+    HBox sp;
+    VBox rb;
+    VBox lb;
 
     
 
-    public Scene getScene() throws IOException{
+    public Scene getScene(Button exit) throws IOException{
 
-        HBox sp=new HBox();
+        sp=new HBox();
+        sp.setSpacing(20);
+        sp.setPadding(new Insets(30));
+        sp.setAlignment(Pos.CENTER);
+
+        rb=new VBox();
+        rb.setSpacing(20);
+
+        lb=new VBox();
+        lb.setSpacing(20);
+
 
         Button FirstBtn=new Button("Select folder");
         FirstBtn.setGraphic(getFolderIcome());
+        FirstBtn.setAlignment(Pos.CENTER);
+        // FirstBtn.setAlignment();
         Button AnotherBtn=new Button("Select Another folder");
         AnotherBtn.setGraphic(getFolderIcome());
-    
+
 
 
 
 
         FirstBtn.setOnAction(e->{
             sp.getChildren().clear();
+            rb.getChildren().clear();
+            lb.getChildren().clear();
+
+            sp.setAlignment(Pos.TOP_LEFT);
+
+
             DirectoryChooser dc=new DirectoryChooser();
             File path= dc.showDialog(new Stage());
             // TVR=new TreeViewer(path.getAbsolutePath());
             try {
-                sp.getChildren().addAll(getTreeView(path.getAbsolutePath()),AnotherBtn,outW.getTextArea(path.getAbsolutePath()));
-                TV=getTreeView(path.getAbsolutePath());
+                TreeView tmpt=getTreeView(path.getAbsolutePath(),exit);
+                rb.getChildren().addAll(tmpt,AnotherBtn);
+                rb.setVgrow(tmpt, Priority.ALWAYS);
+                TextArea temArea=new OutputWindow().getTextArea(path.getAbsolutePath());
+                lb.getChildren().addAll(temArea,exit);
+                lb.setVgrow(temArea, Priority.ALWAYS);
+                sp.getChildren().addAll(rb,lb);
+                TV=getTreeView(path.getAbsolutePath(),exit);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             setPath(path.getAbsolutePath());
             filename=thePath;
-            truePath=thePath;
+            truePath=new OutputWindow().getfilePath(filename,thePath,false,"");
 
-            System.out.println(filename+"    -    "+path.getAbsolutePath());
+            // System.out.println(filename+"    -    "+path.getAbsolutePath());
             // System.out.println(new OutputWindow().getfilePath(TVR.path,path.getAbsolutePath()));    
 
 
@@ -171,20 +201,31 @@ public class FolderTraverse {
 
         AnotherBtn.setOnAction(e->{
             sp.getChildren().clear();
+            rb.getChildren().clear();
+            lb.getChildren().clear();
             DirectoryChooser dc=new DirectoryChooser();
             File path= dc.showDialog(new Stage());
             // TVR=new TreeViewer(path.getAbsolutePath());
             try {
-                sp.getChildren().addAll(getTreeView(path.getAbsolutePath()),AnotherBtn,outW.getTextArea(truePath));
-                TV=getTreeView(path.getAbsolutePath());
+                // filename= TV.getSelectionModel().getSelectedItem().toString().substring(TV.getSelectionModel().getSelectedItem().toString().indexOf("'")+1,TV.getSelectionModel().getSelectedItem().toString().length()-3);
+
+                // truePath=new OutputWindow().getfilePath(filename,thePath,false,"");
+                // System.out.println(truePath);
+                TreeView tmpt=getTreeView(path.getAbsolutePath(),exit);
+                rb.getChildren().addAll(tmpt,AnotherBtn);
+                rb.setVgrow(tmpt, Priority.ALWAYS);
+                TextArea temArea=new OutputWindow().getTextArea(path.getAbsolutePath());
+                lb.getChildren().addAll(temArea,exit);
+                lb.setVgrow(temArea, Priority.ALWAYS);                
+                sp.getChildren().addAll(rb,lb);
+                TV=getTreeView(path.getAbsolutePath(),exit);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             setPath(path.getAbsolutePath());
-            truePath=thePath;
               
-            System.out.println(thePath+"    -    "+filename);
+            // System.out.println(thePath+"    -    "+filename);
             // System.out.println(new OutputWindow().getfilePath(TVR.path,path.getAbsolutePath()));          
         });
 
@@ -203,7 +244,7 @@ public class FolderTraverse {
        
     }
 
-    public TreeView getTreeView(String path) throws IOException{
+    public TreeView getTreeView(String path,Button exit) throws IOException{
         Label rootLabel=new Label("All Folders");
         rootLabel.setGraphic(getFolderIcome());
         TreeItem<Label> root=new TreeItem<>(rootLabel);
@@ -215,11 +256,21 @@ public class FolderTraverse {
         tree.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> { 
             // System.out.println(tree.getSelectionModel().getSelectedItem().toString().substring(51,tree.getSelectionModel().getSelectedItem().toString().length()-3));
             filename= tree.getSelectionModel().getSelectedItem().toString().substring(tree.getSelectionModel().getSelectedItem().toString().indexOf("'")+1,tree.getSelectionModel().getSelectedItem().toString().length()-3);
-            System.out.println(filename);
-            System.out.println("fucj yes :"+outW.getfilePath(filename,thePath,false,""));
-            truePath=outW.getfilePath(filename,thePath,false,"");
+            // System.out.println(filename);
+            // System.out.println("fucj yes :"+outW.getfilePath(filename,thePath,false,""));
+            truePath=new OutputWindow().getfilePath(filename,thePath,false,"");
+            
+
+            sp.getChildren().remove(sp.getChildren().size()-1);
+            lb.getChildren().clear();
+            TextArea temArea=new OutputWindow().getTextArea(truePath);
+            lb.getChildren().addAll(temArea,exit);
+            lb.setVgrow(temArea, Priority.ALWAYS);
+            sp.getChildren().add(lb);
 
             });
+
+            tree.setPrefWidth(400);
 
         return tree;
     }
