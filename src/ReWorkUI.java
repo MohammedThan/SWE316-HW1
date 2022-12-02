@@ -1,12 +1,10 @@
-import java.security.PublicKey;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+
 
 public class ReWorkUI {
     
@@ -17,8 +15,8 @@ public class ReWorkUI {
         grid.setHgap(10);
 
         Label reWork =new Label("ReWork");
-        Label BAReWork=new Label(BA+"");
-        Label AAReWork=new Label(AA+"");
+        Label BAReWork=new Label(String.valueOf(BA));
+        Label AAReWork=new Label(String.valueOf(AA));
         Label Bef=new Label("Before Award");
         Label afr=new Label("After Award");
 
@@ -30,6 +28,8 @@ public class ReWorkUI {
         GridPane.setHalignment(AAReWork, HPos.CENTER);
         GridPane.setConstraints(Bef,0,2);
         GridPane.setConstraints(afr,1,2);
+
+
 
         grid.getChildren().addAll(reWork,BAReWork,AAReWork,Bef,afr);
         grid. setAlignment(Pos.BASELINE_CENTER);

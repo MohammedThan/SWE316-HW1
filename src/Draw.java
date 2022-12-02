@@ -83,11 +83,13 @@ public class Draw {
             Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),updatePoints().get(i) );
             Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), updatePoints().get(i) , 10,10);
             rectangle.setStroke(color(i)); 
+            rectangle.setFill(color(i));
             borderPane.getChildren().addAll(line,rectangle);
         } else{
             Line line=new Line(mydate.allStagePoint().get(i),400,mydate.allStagePoint().get(i),updatePoints().get(i)  );
             Rectangle rectangle = new Rectangle(mydate.allStagePoint().get(i), updatePoints().get(i) , 10,10);
             rectangle.setStroke(color(i)); 
+            rectangle.setFill(color(i));
             borderPane.getChildren().addAll(line,rectangle);
         }
         
@@ -100,35 +102,12 @@ public class Draw {
  private boolean isDuplicateed(int i){
 
            
-    // mydate.allStagePoint().lastIndexOf(mydate.allStagePoint().get(i))==i // 
     if(mydate.allStagePoint().subList(0, i).contains(mydate.allStagePoint().get(i)))
         return true;
     return false;
  }
 
-//  private ArrayList<Double> updatePoints(){
-//     ArrayList<Double> allStagePoint=(ArrayList<Double>)mydate.allStagePoint().clone();
-//     ArrayList<Double> hight=new ArrayList<Double>();
-//     for(int i=0;i<allStagePoint.size();i++){
-//         hight.add(360.0);
-//     }
-//     System.out.println(allStagePoint);
-//     System.out.println(hight);
-//     for(int i=0;i<hight.size();i++){
-//         for(int j=0;j<hight.size();j++){
-//             if( allStagePoint.get(i)==allStagePoint.get(j) ){
-//                 System.out.println((j)+" "+(hight.get(j)));
-//                 hight.set(i,hight.get(j)-20);
-//                 System.out.println((j)+" "+(hight.get(j)));
 
-//             }
-            
-//         }
-//     }
-//     System.out.println(hight);
-
-//     return hight;
-//  }
  private ArrayList<Double> updatePoints(){
     ArrayList<Double> allStagePoint=(ArrayList<Double>)mydate.allStagePoint().clone();
     ArrayList<Double> hight=new ArrayList<Double>();

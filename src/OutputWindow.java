@@ -1,22 +1,6 @@
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 
 
 public class OutputWindow {
@@ -27,7 +11,6 @@ public class OutputWindow {
         TextArea textArea = new TextArea();
         String output="";
         output=getText(path, output,true,"");
-        // System.out.println("output: "+output);
     
         textArea.setText(output);
         textArea.setEditable(false);
@@ -84,14 +67,11 @@ public class OutputWindow {
     private  long getFolderSize(File folder)
     {
         long length = 0;
-       
-        // listFiles() is used to list the
-        // contents of the given folder
+    
         File[] files = folder.listFiles();
  
         int count = files.length;
  
-        // loop for traversing the directory
         for (int i = 0; i < count; i++) {
             if (files[i].isFile()) {
                 length += files[i].length();
@@ -100,13 +80,12 @@ public class OutputWindow {
                 length += getFolderSize(files[i]);
             }
         }
-        return length;
+        return length; 
     }
 
     public String getfilePath(String path,String absPath,Boolean worked,String output){
 
       
-        // System.out.println("absPath:  "+absPath);
 
 
 

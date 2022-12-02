@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
@@ -15,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
@@ -99,8 +97,7 @@ public class App extends Application {
                     Scene scene = new Scene(root);
                     root.setSpacing(50);
                     vbox.getChildren().clear();
-                    vbox.getChildren().addAll( ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)),folderbtn);
-                    // root.getChildren().addAll(projectsTable, ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getBARework()),((Pane)borderPanesList.get(0)));
+                    vbox.getChildren().addAll( ReWorkUI.getReWorkUI(projectsArrayFromCreator.get(selectedIndex).getBARework(), projectsArrayFromCreator.get(selectedIndex).getAARework()),((Pane)borderPanesList.get(0)),folderbtn);
                     root.getChildren().addAll(projectsTable,vbox);
                     primaryStage.setScene(scene);
                     primaryStage.setFullScreen(true);

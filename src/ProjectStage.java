@@ -5,7 +5,7 @@ public class ProjectStage{
     String objectValue;
     double docNum;
     Date date;
-    double newValue;
+    private double newValue;
     boolean isNormal;
 
 
